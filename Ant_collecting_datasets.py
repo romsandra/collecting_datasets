@@ -1,6 +1,6 @@
 import gymnasium as gym
 from stable_baselines3 import PPO
-import numpy as np
+import csv
 
 
 def test_agent(agent, env, episodes=5):
@@ -61,6 +61,9 @@ if __name__=='__main__':
             obs = next_obs
     env.close()
 
-    out = np.transpose(np.column_stack((demo_states, demo_actions)))
-    np.savetxt('Ant_data.csv', out, delimiter=',')
+    with open('Ant_data.csv', mode='w', newline='') as file:
+        writer = csv.writer(file, delimiter=',')
+        writer.writerow(['Observations', 'Actions'])
+        for obs, action in zip(demo_states, demo_actions):
+            writer.writerow([obs.tolist(), action.tolist()])
     print("Демонстрационные данные сохранены в 'Ant_data.csv' с разделителем ','")
