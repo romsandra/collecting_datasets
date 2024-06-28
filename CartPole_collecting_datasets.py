@@ -44,13 +44,13 @@ def test_agent(agent, env, episodes=5):
 # Создание среды
 env = gym.make('CartPole-v1')
 
-# # Создание и обучение RL-агента
-# ppo_agent = PPO('MlpPolicy', env, verbose=1)
-# ppo_agent.learn(total_timesteps=10**5)
-# ppo_agent.save("ppo_cartpole")
+# Создание и обучение RL-агента
+ppo_agent = PPO('MlpPolicy', env, verbose=1)
+ppo_agent.learn(total_timesteps=10**5)
+ppo_agent.save("ppo_cartpole")
 
 # Для использования определённого RL-агента
-ppo_agent = PPO.load("ppo_cartpole", env)
+# ppo_agent = PPO.load("ppo_cartpole", env)
 
 # Создание и обучение PID-агента
 pid_agent = PIDAgent(Kp=0.544, Ki=0, Kd=7)
